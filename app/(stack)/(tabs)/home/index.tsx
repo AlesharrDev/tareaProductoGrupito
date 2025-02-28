@@ -8,8 +8,8 @@ const Hometabs = () => {
 
   return (
     <SafeAreaProvider>
-      <SafeAreaView style={globalStyle.container}>
-        <Text style={globalStyle.h1}>To do list</Text>
+      <SafeAreaView style={{ flex: 1 ,paddingTop:20 }}>
+        <Text style={[globalStyle.h1,{textAlign:'center'}]}>To do list</Text>
         <TodoList/>
       </SafeAreaView>
     </SafeAreaProvider>

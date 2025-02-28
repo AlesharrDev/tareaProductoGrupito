@@ -1,4 +1,5 @@
 // src/components/TodoItem.tsx
+import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
@@ -23,7 +24,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
         </Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={onDelete} style={styles.deleteButton}>
-        <Text style={styles.deleteText}>Eliminar</Text>
+        <Ionicons name="trash" size={20} color="#fff" />
       </TouchableOpacity>
     </View>
   );

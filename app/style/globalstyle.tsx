@@ -26,12 +26,12 @@ const globalStyle = StyleSheet.create({
         width: 70,
     },
     input: {
-        height: 30,
+        height: 40,
         borderColor: "#ccc",
         borderWidth: 1,
         borderRadius: 5,
         paddingHorizontal: 10,
-        fontSize: 10,
+        fontSize: 14,
         width: 170,
     },
     button: {
