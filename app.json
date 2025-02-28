@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "tabs",
+    "name": "toDoList",
     "slug": "tabs",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -15,7 +15,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.alesharr.tabs"
     },
     "web": {
       "bundler": "metro",
@@ -36,6 +37,14 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "13d6a04f-44cd-4c2a-98c6-70ede04e12dd"
+      }
     }
   }
 }
