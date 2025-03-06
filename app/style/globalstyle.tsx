@@ -50,6 +50,25 @@ const globalStyle = StyleSheet.create({
     },
     textblack:{
         color:"black" 
-    } 
+    },
+    card:{
+        backgroundColor:"fuchsia",
+        borderRadius:10,
+        marginBottom:10,
+        padding:20,
+        width:250,
+        height:100,
+        display:"flex",
+        justifyContent:"space-between",
+        alignItems:"center",
+        flexDirection:"row",
+    },
+    deleteButton: {
+        backgroundColor: "#ff4444",
+        padding: 5,
+        borderRadius: 5,
+        borderColor: "black",
+        borderWidth: 1,
+      },
 });
 export default globalStyle;
