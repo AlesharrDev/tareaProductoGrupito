@@ -22,19 +22,38 @@ const Home = () => {
   const [precio, setPrecio] = useState("");
   const [stock, setStock] = useState("");
   const [PductosLista, setPductosLista] = useState<Producto[]>([]);
+  const [editando, setEditando] = useState<Producto | null>(null);
 
   const deleteProducto = (id: string) => {
     setPductosLista(PductosLista.filter((producto) => producto.id !== id));
   };
-  
+
   const addProducto = () => {
-    setPductosLista([
-      ...PductosLista,
-      { id: Date.now().toString(), nombre, precio, stock },
-    ]);
+    if (editando) {
+      setPductosLista(
+        PductosLista.map((producto) =>
+          producto.id === editando.id
+            ? { ...producto, nombre, precio, stock }
+            : producto
+        )
+      );
+      setEditando(null);
+    } else {
+      setPductosLista([
+        ...PductosLista,
+        { id: Date.now().toString(), nombre, precio, stock },
+      ]);
+    }
     setNombre("");
     setPrecio("");
     setStock("");
+  };
+
+  const startEdit = (producto: Producto) => {
+    setEditando(producto);
+    setNombre(producto.nombre);
+    setPrecio(producto.precio);
+    setStock(producto.stock);
   };
 
   return (
@@ -70,7 +89,9 @@ const Home = () => {
         />
       </View>
       <TouchableOpacity style={globalStyle.button} onPress={addProducto}>
-        <Text style={globalStyle.buttonText}>Crear producto</Text>
+        <Text style={globalStyle.buttonText}>
+          {editando ? "Actualizar producto" : "Crear producto"}
+        </Text>
       </TouchableOpacity>
       <Text style={globalStyle.h1}>Productos</Text>
       <FlatList
@@ -94,12 +115,11 @@ const Home = () => {
             <Text style={[globalStyle.buttonText, { fontWeight: "bold" }]}>
               Producto: {item.nombre}
             </Text>
-            <View style={{ display:'flex', flexDirection: "row" ,gap:10 }}>
-              <TouchableOpacity onPress={() => deleteProducto(item.id)}>
+            <View style={{ display: "flex", flexDirection: "row", gap: 10 }}>
+              <TouchableOpacity onPress={() => startEdit(item)}>
                 <Ionicons name="pencil" size={25} color="#fff" />
               </TouchableOpacity>
-              {/* actualizar el producto */}
-              <TouchableOpacity >
+              <TouchableOpacity onPress={() => deleteProducto(item.id)}>
                 <Ionicons name="trash" size={25} color="#fff" />
               </TouchableOpacity>
             </View>
