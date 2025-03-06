@@ -5,56 +5,27 @@ import {
   TouchableOpacity,
   FlatList,
 } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import globalStyle from "@/app/style/globalstyle";
 import { router } from "expo-router";
-
-interface Producto {
-  id: string;
-  nombre: string;
-  precio: string;
-  stock: string;
-}
+import useProductos from "@/app/hook/useProductos";
+ // Asegúrate de que la ruta sea correcta
 
 const Home = () => {
-  const [nombre, setNombre] = useState("");
-  const [precio, setPrecio] = useState("");
-  const [stock, setStock] = useState("");
-  const [PductosLista, setPductosLista] = useState<Producto[]>([]);
-  const [editando, setEditando] = useState<Producto | null>(null);
-
-  const deleteProducto = (id: string) => {
-    setPductosLista(PductosLista.filter((producto) => producto.id !== id));
-  };
-
-  const addProducto = () => {
-    if (editando) {
-      setPductosLista(
-        PductosLista.map((producto) =>
-          producto.id === editando.id
-            ? { ...producto, nombre, precio, stock }
-            : producto
-        )
-      );
-      setEditando(null);
-    } else {
-      setPductosLista([
-        ...PductosLista,
-        { id: Date.now().toString(), nombre, precio, stock },
-      ]);
-    }
-    setNombre("");
-    setPrecio("");
-    setStock("");
-  };
-
-  const startEdit = (producto: Producto) => {
-    setEditando(producto);
-    setNombre(producto.nombre);
-    setPrecio(producto.precio);
-    setStock(producto.stock);
-  };
+  const {
+    nombre,
+    setNombre,
+    precio,
+    setPrecio,
+    stock,
+    setStock,
+    productosLista,
+    editando,
+    deleteProducto,
+    addProducto,
+    startEdit,
+  } = useProductos();
 
   return (
     <View style={globalStyle.container}>
@@ -94,14 +65,14 @@ const Home = () => {
         </Text>
       </TouchableOpacity>
       <Text style={globalStyle.h1}>Productos</Text>
-      <View style={{ flexDirection: "row", marginVertical: 10 ,gap: 10}}>
+      <View style={{ flexDirection: "row", marginVertical: 10, gap: 10 }}>
         <TextInput style={globalStyle.input} placeholder="Buscar producto" />
         <TouchableOpacity style={globalStyle.button}>
           <Text style={globalStyle.buttonText}>Buscar</Text>
         </TouchableOpacity>
       </View>
       <FlatList
-        data={PductosLista}
+        data={productosLista}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <TouchableOpacity
@@ -118,16 +89,16 @@ const Home = () => {
             }
             style={globalStyle.card}
           >
-           <View style={{display: "flex", gap: 10}}>
-           <Text style={[globalStyle.buttonText, { fontWeight: "bold" }]}>
-              Producto: {item.nombre}
-            </Text>
-            {parseInt(item.stock) < 5 ? (
-              <Text style={{ color: "black" }}>Stock bajo</Text>
-            ) : (
-              <Text style={{ color: "white" }}>Stock suficiente</Text>
-            )}
-           </View>
+            <View style={{ display: "flex", gap: 10 }}>
+              <Text style={[globalStyle.buttonText, { fontWeight: "bold" }]}>
+                Producto: {item.nombre}
+              </Text>
+              {parseInt(item.stock) < 5 ? (
+                <Text style={{ color: "black" }}>Stock bajo</Text>
+              ) : (
+                <Text style={{ color: "white" }}>Stock suficiente</Text>
+              )}
+            </View>
             <View style={{ display: "flex", flexDirection: "row", gap: 10 }}>
               <TouchableOpacity onPress={() => startEdit(item)}>
                 <Ionicons name="pencil" size={25} color="#fff" />
