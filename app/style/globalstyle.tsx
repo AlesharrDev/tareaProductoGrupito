@@ -33,6 +33,7 @@ const globalStyle = StyleSheet.create({
         paddingHorizontal: 10,
         fontSize: 14,
         width: 170,
+        marginVertical: 5,
     },
     button: {
         backgroundColor: "#007BFF",
