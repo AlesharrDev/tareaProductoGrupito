@@ -55,7 +55,7 @@ const globalStyle = StyleSheet.create({
     backgroundColor: "fuchsia",
     borderRadius: 10,
     marginBottom: 10,
-    padding: 10,
+    padding: 20,
     width: 280,
     height: 100,
     display: "flex",

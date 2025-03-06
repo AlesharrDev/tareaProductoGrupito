@@ -94,6 +94,12 @@ const Home = () => {
         </Text>
       </TouchableOpacity>
       <Text style={globalStyle.h1}>Productos</Text>
+      <View style={{ flexDirection: "row", marginVertical: 10 ,gap: 10}}>
+        <TextInput style={globalStyle.input} placeholder="Buscar producto" />
+        <TouchableOpacity style={globalStyle.button}>
+          <Text style={globalStyle.buttonText}>Buscar</Text>
+        </TouchableOpacity>
+      </View>
       <FlatList
         data={PductosLista}
         keyExtractor={(item) => item.id}
@@ -112,7 +118,8 @@ const Home = () => {
             }
             style={globalStyle.card}
           >
-            <Text style={[globalStyle.buttonText, { fontWeight: "bold" }]}>
+           <View style={{display: "flex", gap: 10}}>
+           <Text style={[globalStyle.buttonText, { fontWeight: "bold" }]}>
               Producto: {item.nombre}
             </Text>
             {parseInt(item.stock) < 5 ? (
@@ -120,6 +127,7 @@ const Home = () => {
             ) : (
               <Text style={{ color: "white" }}>Stock suficiente</Text>
             )}
+           </View>
             <View style={{ display: "flex", flexDirection: "row", gap: 10 }}>
               <TouchableOpacity onPress={() => startEdit(item)}>
                 <Ionicons name="pencil" size={25} color="#fff" />
