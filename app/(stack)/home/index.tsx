@@ -115,6 +115,11 @@ const Home = () => {
             <Text style={[globalStyle.buttonText, { fontWeight: "bold" }]}>
               Producto: {item.nombre}
             </Text>
+            {parseInt(item.stock) < 5 ? (
+              <Text style={{ color: "black" }}>Stock bajo</Text>
+            ) : (
+              <Text style={{ color: "white" }}>Stock suficiente</Text>
+            )}
             <View style={{ display: "flex", flexDirection: "row", gap: 10 }}>
               <TouchableOpacity onPress={() => startEdit(item)}>
                 <Ionicons name="pencil" size={25} color="#fff" />
